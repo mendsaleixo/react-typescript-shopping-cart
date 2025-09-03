@@ -71,12 +71,15 @@ function App() {
       <header>
         <h1>Minha Loja</h1>
       </header>
-      <main className="container">
-        {loading ? (
-          <p>A carregar produtos...</p>
-        ) : (
-          <ProductList produtos={produtos} onAddToCart={handleAddToCart} />
-        )}
+      <main>
+        <div className="container">
+          <h1>Nossos Produtos</h1>
+          {loading ? (
+            <p>A carregar produtos...</p>
+          ) : (
+            <ProductList produtos={produtos} onAddToCart={handleAddToCart} />
+          )}
+        </div>
       </main>
 
       <Cart

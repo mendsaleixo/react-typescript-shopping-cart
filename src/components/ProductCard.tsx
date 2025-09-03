@@ -2,7 +2,7 @@ import type { Produto } from "../types";
 
 type ProductCardProps = {
   produto: Produto;
-  onAddToCart: (produto: Produto) => void; 
+  onAddToCart: (produto: Produto) => void;
 };
 
 function ProductCard({ produto, onAddToCart }: ProductCardProps) {
@@ -10,7 +10,7 @@ function ProductCard({ produto, onAddToCart }: ProductCardProps) {
     <div className="product-card">
       <img src={produto.image} alt={produto.title} />
       <h3>{produto.title}</h3>
-      <p className="price">€ {produto.price.toFixed(2)}</p>
+      <p className="price">R$ {produto.price.toFixed(2)}</p>
 
       <button onClick={() => onAddToCart(produto)}>
         Adicionar ao Carrinho

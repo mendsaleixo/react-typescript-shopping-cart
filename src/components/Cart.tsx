@@ -14,21 +14,25 @@ function Cart({ itens, onRemoveFromCart, onUpdateQuantity }: CartProps) {
 
   return (
     <aside className="cart">
-      <h2>O Meu Carrinho</h2>
-      {itens.length === 0 ? (
-        <p>O seu carrinho está vazio.</p>
-      ) : (
-        <ul>
-          {itens.map((item) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              onRemoveFromCart={onRemoveFromCart}
-              onUpdateQuantity={onUpdateQuantity}
-            />
-          ))}
-        </ul>
-      )}
+      <h2>Meu Carrinho</h2>
+
+      <div className="cart-body">
+        {itens.length === 0 ? (
+          <p className="empty-cart-message">O seu carrinho está vazio.</p>
+        ) : (
+          <ul>
+            {itens.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                onRemoveFromCart={onRemoveFromCart}
+                onUpdateQuantity={onUpdateQuantity}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
+
       <div className="cart-total">
         <h3>Total:</h3>
         <h3>R$ {total.toFixed(2)}</h3>
