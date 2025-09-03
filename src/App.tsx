@@ -1,12 +1,10 @@
-// Ficheiro: src/App.tsx
+import { useState, useEffect } from "react";
+import type { Produto, ItemCarrinho } from "./types";
+import ProductList from "./components/ProductList";
+import Cart from "./components/Cart"; // 1. Importe o Carrinho
+import "./styles/main.css";
 
-import { useState, useEffect } from 'react';
-import type { Produto, ItemCarrinho } from './types';
-import ProductList from './components/ProductList';
-import './styles/main.css';
-
-
-const apiUrl = 'https://fakestoreapi.com/products';
+const apiUrl = "https://fakestoreapi.com/products";
 
 function App() {
   // Estado para guardar a lista de produtos vinda da API
@@ -22,7 +20,7 @@ function App() {
       try {
         const resposta = await fetch(apiUrl);
         if (!resposta.ok) {
-          throw new Error('Falha ao buscar os produtos.');
+          throw new Error("Falha ao buscar os produtos.");
         }
         const dados: Produto[] = await resposta.json();
         setProdutos(dados);
@@ -37,12 +35,14 @@ function App() {
 
   const handleAddToCart = (produtoAdicionado: Produto) => {
     // Verificamos se o produto já existe no carrinho pelo seu id
-    const produtoJaExiste = carrinho.find(item => item.id === produtoAdicionado.id);
+    const produtoJaExiste = carrinho.find(
+      (item) => item.id === produtoAdicionado.id
+    );
 
     if (produtoJaExiste) {
       // Se existe: criamos um NOVO array (imutabilidade) e apenas
       // incrementamos a quantidade do item correspondente.
-      const novoCarrinho = carrinho.map(item => 
+      const novoCarrinho = carrinho.map((item) =>
         item.id === produtoAdicionado.id
           ? { ...item, quantidade: item.quantidade + 1 }
           : item
@@ -56,20 +56,21 @@ function App() {
     }
   };
 
-  // Log temporário para verificarmos o estado do carrinho durante o desenvolvimento
-  console.log("Itens no carrinho:", carrinho);
-
   return (
-    <div className="container">
-      <h1>Vitrine de Produtos</h1>
-      {loading ? (
-        <p>A carregar produtos...</p>
-      ) : (
-        // Passamos a lista de produtos e a função de adicionar para a lista
-        <ProductList produtos={produtos} onAddToCart={handleAddToCart} />
-      )}
+    <div className="app-layout">
+      <header>
+        <h1>Minha Loja</h1>
+      </header>
+      <main className="container">
+        {loading ? (
+          <p>Carregando produtos...</p>
+        ) : (
+          <ProductList produtos={produtos} onAddToCart={handleAddToCart} />
+        )}
+      </main>
+      <Cart itens={carrinho} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
