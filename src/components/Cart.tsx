@@ -5,9 +5,10 @@ import CartItem from "./CartItem";
 
 type CartProps = {
   itens: ItemCarrinho[];
+  onRemoveFromCart: (id: number) => void;
 };
 
-function Cart({ itens }: CartProps) {
+function Cart({ itens, onRemoveFromCart }: CartProps) {
   const total = itens.reduce((soma, item) => {
     return soma + item.price * item.quantidade;
   }, 0);
@@ -20,7 +21,11 @@ function Cart({ itens }: CartProps) {
       ) : (
         <ul>
           {itens.map((item) => (
-            <CartItem key={item.id} item={item} />
+            <CartItem
+              key={item.id}
+              item={item}
+              onRemoveFromCart={onRemoveFromCart}
+            />
           ))}
         </ul>
       )}

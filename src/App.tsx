@@ -56,6 +56,11 @@ function App() {
     }
   };
 
+  const handleRemoveFromCart = (idDoProduto: number) => {
+    const novoCarrinho = carrinho.filter((item) => item.id !== idDoProduto);
+    setCarrinho(novoCarrinho);
+  };
+
   return (
     <div className="app-layout">
       <header>
@@ -68,7 +73,7 @@ function App() {
           <ProductList produtos={produtos} onAddToCart={handleAddToCart} />
         )}
       </main>
-      <Cart itens={carrinho} />
+      <Cart itens={carrinho} onRemoveFromCart={handleRemoveFromCart} />
     </div>
   );
 }
