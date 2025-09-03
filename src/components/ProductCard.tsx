@@ -2,7 +2,7 @@ import type { Produto } from "../types";
 
 type ProductCardProps = {
   produto: Produto;
-  onAddToCart: (produto: Produto) => void; // Recebendo a função
+  onAddToCart: (produto: Produto) => void; 
 };
 
 function ProductCard({ produto, onAddToCart }: ProductCardProps) {
@@ -11,7 +11,7 @@ function ProductCard({ produto, onAddToCart }: ProductCardProps) {
       <img src={produto.image} alt={produto.title} />
       <h3>{produto.title}</h3>
       <p className="price">€ {produto.price.toFixed(2)}</p>
-      {/* Conectando a função ao onClick do botão */}
+
       <button onClick={() => onAddToCart(produto)}>
         Adicionar ao Carrinho
       </button>

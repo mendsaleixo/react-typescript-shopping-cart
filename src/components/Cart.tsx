@@ -1,23 +1,22 @@
-// Arquivo: src/components/Cart.tsx
-
 import type { ItemCarrinho } from "../types";
 import CartItem from "./CartItem";
 
 type CartProps = {
   itens: ItemCarrinho[];
   onRemoveFromCart: (id: number) => void;
+  onUpdateQuantity: (id: number, novaQuantidade: number) => void;
 };
 
-function Cart({ itens, onRemoveFromCart }: CartProps) {
+function Cart({ itens, onRemoveFromCart, onUpdateQuantity }: CartProps) {
   const total = itens.reduce((soma, item) => {
     return soma + item.price * item.quantidade;
   }, 0);
 
   return (
     <aside className="cart">
-      <h2>Meu Carrinho</h2>
+      <h2>O Meu Carrinho</h2>
       {itens.length === 0 ? (
-        <p>Seu carrinho está vazio.</p>
+        <p>O seu carrinho está vazio.</p>
       ) : (
         <ul>
           {itens.map((item) => (
@@ -25,6 +24,7 @@ function Cart({ itens, onRemoveFromCart }: CartProps) {
               key={item.id}
               item={item}
               onRemoveFromCart={onRemoveFromCart}
+              onUpdateQuantity={onUpdateQuantity}
             />
           ))}
         </ul>
