@@ -10,3 +10,6 @@ export interface Produto {
     count: number;
   };
 }
+export interface ItemCarrinho extends Produto {
+  quantidade: number;
+}
